@@ -6,22 +6,6 @@
 
 using namespace std;
 
-// Move createMove(char& a, char& x) {
-// 	int y;
-// 	switch(a) {
-// 		case 65: y=0;
-// 		case 66: y=1;
-// 		case 67: y=2;
-// 		case 68: y=3;
-// 		case 69: y=4;
-// 		case 70: y=5;
-// 		case 71: y=6;
-// 		case 72: y=7;
-// 	}
-
-// 	return Move(x, y);
-// }
-
 bool checkCoord(string const& s) {
 	if(s.length() != 2) return false;
 	if(s[1]<65 || s[1]>72 || s[0]<49 || s[0]>56) return false;
@@ -66,7 +50,7 @@ int main() {
 				cout << "Ok, let's make that move" << endl;
 				board.changeTurn();
 				board.printBoard();
-				cout << "nb of turns played = " << board.getNbOfMoveAlreadyPlayed() << endl;
+				//cout << "nb of turns played = " << board.getNbOfMoveAlreadyPlayed() << endl;
 			}
 			//cout << "end of if checkCoord true" << endl;
 

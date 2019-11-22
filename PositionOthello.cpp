@@ -85,136 +85,6 @@ bool PositionOthello::playerPlay(Move& m) {
     checkDiagonalLeftUp(m);
     checkDiagonalRightDown(m);
     checkDiagonalLeftDown(m);
- //    if(m.getY()<sizeof(board)-1) {
-	//    if(board[m.getX()][m.getY()+1] == player) {
-	//       Move nextMove = Move(m.getX(), m.getY()+1);
-	//       if(board[m.getX()][m.getY()+2] == currentPlayer) {
-	//          applyMove(m);
-	//          applyMove(nextMove);
-	//          apply = true;
-	//          cout << "001" << endl;
-	//       } else if (board[m.getX()][m.getY()+2] == player) {
-	//          tabRight.push_back(m);
-	//          tabRight.push_back(nextMove);
-	//          cout << "0010" << endl;
-	//          checkRight(nextMove);
-	//       }
-	//    }
-	// }
-	// if(m.getY()>0) {
-	//    if(board[m.getX()][m.getY()-1] == player) {
-	//       Move nextMove = Move(m.getX(), m.getY()-1);
-	//       if(board[m.getX()][m.getY()-2] == currentPlayer) {
-	//          applyMove(m);
-	//          applyMove(nextMove);
-	//          apply = true;
-	//          cout << "002" << endl;
-	//       } else if(board[m.getX()][m.getY()-2] == player) {
-	//          tabLeft.push_back(m);
-	//          tabLeft.push_back(nextMove);
-	//          cout << "0020" << endl;
-	//          checkLeft(nextMove);
-	//       }
-	//    }
-	// }
-	// if(m.getX()>0) {
-	//    if(board[m.getX()-1][m.getY()] == player) {
-	//       Move nextMove = Move(m.getX()-1, m.getY());
-	//       if(board[m.getX()-2][m.getY()] == currentPlayer) {
-	//          applyMove(m);
-	//          applyMove(nextMove);
-	//          apply = true;
-	//          cout << "003" << endl;
-	//       } else if(board[m.getX()-2][m.getY()] == player) {
-	//          tabUp.push_back(m);
-	//          tabUp.push_back(nextMove);
-	//          cout << "0030" << endl;
-	//          checkUp(nextMove);
-	//       }
-	//    }
-	// }
-	// if(m.getX()<sizeof(board[0])-1) {
-	//    if(board[m.getX()+1][m.getY()] == player) {
-	//       Move nextMove = Move(m.getX()+1, m.getY());
-	//       if(board[m.getX()+2][m.getY()] == currentPlayer) {
-	//          applyMove(m);
-	//          applyMove(nextMove);
-	//          apply = true;
-	//          cout << "004" << endl;
-	//       } else if(board[m.getX()+2][m.getY()] == player) {
-	//          tabDown.push_back(m);
-	//          tabDown.push_back(nextMove);
-	//          cout << "0040" << endl;
-	//          checkDown(nextMove);
-	//       }
-	//    }
-	// }
-	// if(m.getY()<sizeof(board)-1 && m.getX()>0) {
-	//    if(board[m.getX()-1][m.getY()+1] == player) {
-	//       Move nextMove = Move(m.getX()-1, m.getY()+1);
-	//       if(board[m.getX()-2][m.getY()+2] == currentPlayer) {
-	//          applyMove(m);
-	//          applyMove(nextMove);
-	//          apply = true;
-	//          cout << "005" << endl;
-	//       } else if(board[m.getX()-2][m.getY()+2] == player) {
-	//          tabDiaRightUp.push_back(m);
-	//          tabDiaRightUp.push_back(nextMove);
-	//          cout << "0050" << endl;
-	//          checkDiagonalRightUp(nextMove);
-	//       }
-	//    }
-	// }
-	// if(m.getY()>0 && m.getX()>0) {
-	//    if(board[m.getX()-1][m.getY()-1] == player) {
-	//       Move nextMove = Move(m.getX()-1, m.getY()-1);
-	//       if(board[m.getX()-2][m.getY()-2] == currentPlayer) {
-	//          applyMove(m);
-	//          applyMove(nextMove);
-	//          apply = true;
-	//          cout << "006" << endl;
-	//       } else if(board[m.getX()-2][m.getY()-2] == player) {
-	//          tabDiaLeftUp.push_back(m);
-	//          tabDiaLeftUp.push_back(nextMove);
-	//          cout << "0060" << endl;
-	//          checkDiagonalLeftUp(nextMove);
-	//       }
-	//    }
-	// }
-	// if(m.getY()<sizeof(board)-1 && m.getX()<sizeof(board[0])-1) {
-	//    if(board[m.getX()+1][m.getY()+1] == player) {
-	//       Move nextMove = Move(m.getX()+1, m.getY()+1);
-	//       if(board[m.getX()+2][m.getY()+2] == currentPlayer) {
-	//          applyMove(m);
-	//          applyMove(nextMove);
-	//          apply = true;
-	//          cout << "007" << endl;
-	//       } else if(board[m.getX()+2][m.getY()+2] == player) {
-	//          tabDiaRightDown.push_back(m);
-	//          tabDiaRightDown.push_back(nextMove);
-	//          cout << "0070" << endl;
-	//          checkDiagonalRightDown(nextMove);
-	//       }
-	//    }
-	// }
-	// if(m.getY()>0 && m.getX()<sizeof(board[0])-1) {
-	//    if(board[m.getX()+1][m.getY()-1] == player) {
-	//       Move nextMove = Move(m.getX()+1, m.getY()-1);
-	//       if(board[m.getX()+2][m.getY()-2] == currentPlayer) {
-	//          applyMove(m);
-	//          applyMove(nextMove);
-	//          apply = true;
-	//          cout << "008" << endl;
-	//       } else if(board[m.getX()+2][m.getY()-2] == player) {
-	//          tabDiaLeftDown.push_back(m);
-	//          tabDiaLeftDown.push_back(nextMove);
-	//          cout << "0080" << endl;
-	//          checkDiagonalLeftDown(nextMove);
-	//       }
-	//    }
-	// }
-
-   //------ end ------
 
    //no pieces to return so move is not valid
    if(tabRight.empty() 
@@ -224,8 +94,7 @@ bool PositionOthello::playerPlay(Move& m) {
       && tabDiaRightUp.empty() 
       && tabDiaRightDown.empty() 
       && tabDiaLeftDown.empty() 
-      && tabDiaLeftUp.empty()
-      /*&& !apply*/) {
+      && tabDiaLeftUp.empty()) {
       cout << "no pieces to return so cannot play move" << endl;
       return false;
    }
@@ -235,49 +104,49 @@ bool PositionOthello::playerPlay(Move& m) {
       if(!tabRight.empty()) {
          for(int i=0; i<(int)tabRight.size(); i++) {
             applyMove(tabRight[i]);
-            cout << "tabRight " << endl;
+            //cout << "tabRight " << endl;
          }
       }
       if(!tabLeft.empty()) {
          for(int i=0; i<(int)tabLeft.size(); i++) {
             applyMove(tabLeft[i]);
-            cout << "tabLeft " << endl;
+            //cout << "tabLeft " << endl;
          }
       }
       if(!tabUp.empty()) {
          for(int i=0; i<(int)tabUp.size(); i++) {
             applyMove(tabUp[i]);
-            cout << " tabUp" << endl;
+            //cout << " tabUp" << endl;
          }
       }
       if(!tabDown.empty()) {
          for(int i=0; i<(int)tabDown.size(); i++) {
             applyMove(tabDown[i]);
-            cout << " tabDown" << endl;
+            //cout << " tabDown" << endl;
          }
       }
       if(!tabDiaLeftDown.empty()) {
          for(int i=0; i<(int)tabDiaLeftDown.size(); i++) {
             applyMove(tabDiaLeftDown[i]);
-            cout << "tabDiaLeftDown " << endl;
+            //cout << "tabDiaLeftDown " << endl;
          }
       }
       if(!tabDiaRightDown.empty()) {
          for(int i=0; i<(int)tabDiaRightDown.size(); i++) {
             applyMove(tabDiaRightDown[i]);
-            cout << " tabDiaRightDown" << endl;
+            //cout << " tabDiaRightDown" << endl;
          }
       }
       if(!tabDiaLeftUp.empty()) {
          for(int i=0; i<(int)tabDiaLeftUp.size(); i++) {
             applyMove(tabDiaLeftUp[i]);
-           cout << " tabDiaLeftUp" << endl;
+           //cout << " tabDiaLeftUp" << endl;
          }
       }
       if(!tabDiaRightUp.empty()) {
          for(int i=0; i<(int)tabDiaRightUp.size(); i++) {
             applyMove(tabDiaRightUp[i]);
-            cout << " tabDiaRightUp" << endl;
+            //cout << " tabDiaRightUp" << endl;
          }
       }
 
@@ -297,16 +166,16 @@ bool PositionOthello::playerPlay(Move& m) {
 
 bool PositionOthello::checkRight(Move const& m) {
    if(board[m.getX()][m.getY()+1] == currentPlayer) {
-   		cout << "1" << endl;
+   	cout << "1" << endl;
       return true;
    }
-   if(m.getY()+1 == (sizeof(board)/sizeof(int))-1 || board[m.getX()][m.getY()+1] == 0) {
+   if(m.getY()+1 >= 7 || board[m.getX()][m.getY()+1] == 0) {
       tabRight.clear();
       cout << "CLEAR 1" << endl;
       return false;
    }
    else {
-   	  Move nextMove = Move(m.getX(), m.getY()+1);
+   	Move nextMove = Move(m.getX(), m.getY()+1);
       tabRight.push_back(nextMove);
       cout << "R1" << endl;
       return checkRight(nextMove);
@@ -315,11 +184,10 @@ bool PositionOthello::checkRight(Move const& m) {
 
 bool PositionOthello::checkLeft(Move const& m) {
    if(board[m.getX()][m.getY()-1] == currentPlayer) {
-      //tabLeft.push_back(m);
    	cout << "2" << endl;
       return true;
    }
-   if(m.getY()-1 == 0 || board[m.getX()][m.getY()-1] == 0) {
+   if(m.getY()-1 <= 0 || board[m.getX()][m.getY()-1] == 0) {
       tabLeft.clear();
       cout << "CLEAR 2" << endl;
       return false;
@@ -334,17 +202,16 @@ bool PositionOthello::checkLeft(Move const& m) {
 
 bool PositionOthello::checkUp(Move const& m) {
    if(board[m.getX()-1][m.getY()] == currentPlayer) {
-      //tabUp.push_back(m);
    	cout << "3" << endl;
       return true;
    }
-   if(m.getX()-1 == 0 || board[m.getX()-1][m.getY()] == 0) {
+   if(m.getX()-1 <= 0 || board[m.getX()-1][m.getY()] == 0) {
       tabUp.clear();
       cout << "CLEAR 3" << endl;
       return false;
    }
    else {
-   	  Move nextMove = Move(m.getX()-1, m.getY());
+   	Move nextMove = Move(m.getX()-1, m.getY());
       tabUp.push_back(nextMove);
       cout << "R3" << endl;
       return checkUp(nextMove);
@@ -353,17 +220,16 @@ bool PositionOthello::checkUp(Move const& m) {
 
 bool PositionOthello::checkDown(Move const& m) {
    if(board[m.getX()+1][m.getY()] == currentPlayer) {
-      //tabDown.push_back(m);
    	cout << "4" << endl;
       return true;
    }
-   if(m.getX()+1 == (sizeof(board)/sizeof(int))-1 || board[m.getX()+1][m.getY()] == 0) {
+   if(m.getX()+1 >= 7 || board[m.getX()+1][m.getY()] == 0) {
       tabDown.clear();
       cout << "CLEAR 4" << endl;
       return false;
    }
    else {
-   	  Move nextMove = Move(m.getX()+1, m.getY());
+   	Move nextMove = Move(m.getX()+1, m.getY());
       tabDown.push_back(nextMove);
       cout << "R4" << endl;
       return checkDown(nextMove);
@@ -371,18 +237,20 @@ bool PositionOthello::checkDown(Move const& m) {
 }
 
 bool PositionOthello::checkDiagonalRightUp(Move const& m) {
+   // cout << "sizeof(int) = " << sizeof(int) << endl;
+   // cout << "sizeof(board) = " << sizeof(board) << endl;
+   // cout << "(sizeof(board)/sizeof(int)) = " << (sizeof(board)/sizeof(int)) << endl;
    if(board[m.getX()-1][m.getY()+1] == currentPlayer) {
-      //tabDiaRightUp.push_back(m);
    	cout << "5" << endl;
       return true;
    }
-   if(m.getY()+1 == (sizeof(board)/sizeof(int))-1 || m.getX()-1 == 0 || board[m.getX()-1][m.getY()+1] == 0) {
+   if(m.getY()+1 >= 7 || m.getX()-1 <= 0 || board[m.getX()-1][m.getY()+1] == 0) {
       tabDiaRightUp.clear();
       cout << "CLEAR 5" << endl;
       return false;
    }
    else {
-   	  Move nextMove = Move(m.getX()-1, m.getY()+1);
+   	Move nextMove = Move(m.getX()-1, m.getY()+1);
       tabDiaRightUp.push_back(nextMove);
       cout << "R5" << endl;
       return checkDiagonalRightUp(nextMove);
@@ -391,17 +259,16 @@ bool PositionOthello::checkDiagonalRightUp(Move const& m) {
 
 bool PositionOthello::checkDiagonalLeftUp(Move const& m) {
    if(board[m.getX()-1][m.getY()-1] == currentPlayer) {
-      //tabDiaLeftUp.push_back(m);
    	cout << "6" << endl;
       return true;
    }
-   if(m.getY()-1 == 0 || m.getX()-1 == 0 || board[m.getX()-1][m.getY()-1] == 0) {
+   if(m.getY()-1 <= 0 || m.getX()-1 <= 0 || board[m.getX()-1][m.getY()-1] == 0) {
       tabDiaLeftUp.clear();
       cout << "CLEAR 6" << endl;
       return false;
    }
    else {
-   	  Move nextMove = Move(m.getX()-1, m.getY()-1);
+   	Move nextMove = Move(m.getX()-1, m.getY()-1);
       tabDiaLeftUp.push_back(nextMove);
       cout << "R6" << endl;
       return checkDiagonalLeftUp(nextMove);
@@ -410,17 +277,16 @@ bool PositionOthello::checkDiagonalLeftUp(Move const& m) {
 
 bool PositionOthello::checkDiagonalRightDown(Move const& m) {
    if(board[m.getX()+1][m.getY()+1] == currentPlayer) {
-      //tabDiaRightDown.push_back(m);
    	cout << "7" << endl;
       return true;
    }
-   if(m.getX()+1 == (sizeof(board)/sizeof(int))-1 || m.getY()+1 == (sizeof(board)/sizeof(int))-1 || board[m.getX()+1][m.getY()+1] == 0) {
+   if(m.getX()+1 >= 7 || m.getY()+1 >= 7 || board[m.getX()+1][m.getY()+1] == 0) {
       tabDiaRightDown.clear();
       cout << "CLEAR 7" << endl;
       return false;
    }
    else {
-   	  Move nextMove = Move(m.getX()+1, m.getY()+1);
+   	Move nextMove = Move(m.getX()+1, m.getY()+1);
       tabDiaRightDown.push_back(nextMove);
       cout << "R7" << endl;
       return checkDiagonalRightDown(nextMove);
@@ -429,17 +295,16 @@ bool PositionOthello::checkDiagonalRightDown(Move const& m) {
 
 bool PositionOthello::checkDiagonalLeftDown(Move const& m) {
    if(board[m.getX()+1][m.getY()-1] == currentPlayer) {
-      //tabDiaLeftDown.push_back(m);
    	cout << "8" << endl;
       return true;
    }
-   if(m.getX()+1 == (sizeof(board)/sizeof(int))-1 || m.getY()-1 == 0 || board[m.getX()+1][m.getY()-1] == 0) {
+   if(m.getX()+1 >= 7 || m.getY()-1 == 0 || board[m.getX()+1][m.getY()-1] == 0) {
       tabDiaLeftDown.clear();
       cout << "CLEAR 8" << endl;
       return false;
    }
    else {
-   	  Move nextMove = Move(m.getX()+1, m.getY()-1);
+   	Move nextMove = Move(m.getX()+1, m.getY()-1);
       tabDiaLeftDown.push_back(nextMove);
       cout << "R8" << endl;
       return checkDiagonalLeftDown(nextMove);
