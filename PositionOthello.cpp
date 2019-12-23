@@ -26,7 +26,7 @@ PositionOthello::PositionOthello() {
 
 void PositionOthello::printBoard() {
 
-	cout << "   ";
+	cout << "    ";
 	for(char k = 65; k<73; k++) {
 		cout << " " << k << " ";
 	}
@@ -34,7 +34,7 @@ void PositionOthello::printBoard() {
 	cout << endl;
 
 	for(int i=0; i<8; i++) {
-		cout << " " << i+1 << " "; // i = rows
+		cout << " " << i+1 << ": "; // i = rows
 		for(int j=0; j<8; j++) {
 			//cout << " " << j << " "; j =colomn
 			cout << " " << board[i][j] << " ";
@@ -50,6 +50,15 @@ void PositionOthello::applyMove(Move const& m) {
 
 int PositionOthello::getNbOfMoveAlreadyPlayed() {
    return nbOfMoveAlreadyPlayed;
+}
+
+void PositionOthello::passTurn() {
+	if (currentPlayer == 1) {
+		//TODO: iterate through board to check if indeed there are no possible moves
+		currentPlayer = 2;
+	} else {
+		currentPlayer = 1;
+	}
 }
 
 bool PositionOthello::playerPlay(Move& m) {

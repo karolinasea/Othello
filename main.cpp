@@ -23,7 +23,7 @@ int main() {
 
 	while(!board.gameOver()) {
 		cout << endl;
-		cout << "Player " << board.getCurrentPlayer() << " your next move is (enter the coordinates : number then letter)" << endl;
+		cout << "Player " << board.getCurrentPlayer() << " your next move is (enter the coordinates : number then letter \n if there is no possible move you can pass your turn by typing pass)" << endl;
 		string coord;
 		cin >> coord;
 		if(cin.fail()) {
@@ -31,7 +31,10 @@ int main() {
           cin.ignore(std::numeric_limits<int>::max(),'\n'); 
           cout << "mauvaise entree 1" << endl;
       	}
-		while(!checkCoord(coord)) {
+      	if(coord == "pass") {
+      		board.passTurn();
+      	}
+		while(!checkCoord(coord) && coord != "pass") {
 			cout << "Try again, you must enter the coordinates : letter and then number next to each other (no space)" << endl;
 			string coord;
 			cin >> coord;

@@ -22,6 +22,9 @@ public:
 	//renvoit false si coup n'est pas legal
 	bool playerPlay(Move& m);
 
+	// when no move is possible for pawn we can skip turn
+	void passTurn();
+
 
 	//program must first check all the possible moves Move to make
 	//then eval the best one
