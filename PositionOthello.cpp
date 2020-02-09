@@ -3,11 +3,7 @@
 #include "Move.h"
 #include "PositionOthello.h"
 
-using namespace std;
-
 PositionOthello::PositionOthello() {
-	//player 2 = white
-	//player 1 = black
 
 	currentPlayer = 1;
 	nbOfMoveAlreadyPlayed = 0;
@@ -26,21 +22,21 @@ PositionOthello::PositionOthello() {
 
 void PositionOthello::printBoard() {
 
-	cout << "    ";
+	std::cout << "    ";
 	for(char k = 65; k<73; k++) {
-		cout << " " << k << " ";
+		std::cout << " " << k << " ";
 	}
 
-	cout << endl;
+	std::cout << std::endl;
 
 	for(int i=0; i<8; i++) {
-		cout << " " << i+1 << ": "; // i = rows
+		std::cout << " " << i+1 << ": "; // i = rows
 		for(int j=0; j<8; j++) {
-			//cout << " " << j << " "; j =colomn
-			cout << " " << board[i][j] << " ";
+			// j =colomn
+			std::cout << " " << board[i][j] << " ";
 		}
-		cout << endl;
-		cout << endl;
+		std::cout << std::endl;
+		std::cout << std::endl;
 	}
 }
 
@@ -52,36 +48,93 @@ int PositionOthello::getNbOfMoveAlreadyPlayed() {
    return nbOfMoveAlreadyPlayed;
 }
 
-void PositionOthello::passTurn() {
-	if (currentPlayer == 1) {
-		//TODO: iterate through board to check if indeed there are no possible moves
-		currentPlayer = 2;
-	} else {
-		currentPlayer = 1;
-	}
+void PositionOthello::skipTurn() {
+   for(int i=0; i<8; i++) {
+      for(int j=0; j<8; j++) {
+         if(board[i][j] == 0) {
+            Move m = Move(i, j);
+            if(!checkSkipTurn(m)) {
+               std::cout << "You cannot skip your turn because there is at least one possible move to make" << std::endl;
+               return;
+            }
+         }
+      }
+   }
+   if (currentPlayer == 1) currentPlayer = 2;
+	else currentPlayer = 1;
+}
+
+bool PositionOthello::checkSkipTurn(Move& m) {
+
+   //if the move has no enemy piece adjacent then indeed we can't play that move
+   if(board[m.getX()-1][m.getY()] == currentPlayer 
+      && board[m.getX()+1][m.getY()] == currentPlayer
+      && board[m.getX()][m.getY()-1] == currentPlayer
+      && board[m.getX()][m.getY()+1] == currentPlayer
+      && board[m.getX()+1][m.getY()+1] == currentPlayer
+      && board[m.getX()+1][m.getY()-1] == currentPlayer
+      && board[m.getX()-1][m.getY()+1] == currentPlayer
+      && board[m.getX()-1][m.getY()-1] == currentPlayer) {
+      // cout << " no ennemy piece adjacent to this move " << endl;
+         return true;
+      }
+
+   //------ checking all pieces needed to be changed ------
+    checkRight(m);
+    checkLeft(m);
+    checkUp(m);
+    checkDown(m);
+    checkDiagonalRightUp(m);
+    checkDiagonalLeftUp(m);
+    checkDiagonalRightDown(m);
+    checkDiagonalLeftDown(m);
+
+   //no pieces to return so move so indeed we can't play that move
+   if(tabRight.empty() 
+      && tabLeft.empty() 
+      && tabUp.empty() 
+      && tabDown.empty()
+      && tabDiaRightUp.empty() 
+      && tabDiaRightDown.empty() 
+      && tabDiaLeftDown.empty() 
+      && tabDiaLeftUp.empty()) {
+      // std::cout << "no pieces to return so cannot play move" << std::endl;
+      return true;
+   }
+   
+   tabRight.clear();
+   tabLeft.clear();
+   tabUp.clear();
+   tabDown.clear();
+   tabDiaRightUp.clear();
+   tabDiaRightDown.clear();
+   tabDiaLeftUp.clear();
+   tabDiaLeftDown.clear();
+
+   //none of the conditions are true so the move can actually be played!
+   return false;
 }
 
 bool PositionOthello::playerPlay(Move& m) {
-   //bool apply = false;
-   int player;
-   if(currentPlayer==1) player = 2;
-   else if(currentPlayer==2) player = 1;
+   // int player;
+   // if(currentPlayer==1) player = 2;
+   // else if(currentPlayer==2) player = 1;
 
    //the move must be in an empty spot (=0)
    if(board[m.getX()][m.getY()] != 0) {
-      cout << " != 0 cannot play this move here" << endl;
+      std::cout << " != 0 cannot play this move here" << std::endl;
       return false;
    }
    //if the move has no enemy piece adjacent then it's not valid
-   if(board[m.getX()-1][m.getY()] != player 
-      && board[m.getX()+1][m.getY()] != player
-      && board[m.getX()][m.getY()-1] != player
-      && board[m.getX()][m.getY()+1] != player
-      && board[m.getX()+1][m.getY()+1] != player
-      && board[m.getX()+1][m.getY()-1] != player
-      && board[m.getX()-1][m.getY()+1] != player
-      && board[m.getX()-1][m.getY()-1] != player) {
-      cout << " no ennemy piece adjacent to this move " << endl;
+   if(board[m.getX()-1][m.getY()] == currentPlayer 
+      && board[m.getX()+1][m.getY()] == currentPlayer
+      && board[m.getX()][m.getY()-1] == currentPlayer
+      && board[m.getX()][m.getY()+1] == currentPlayer
+      && board[m.getX()+1][m.getY()+1] == currentPlayer
+      && board[m.getX()+1][m.getY()-1] == currentPlayer
+      && board[m.getX()-1][m.getY()+1] == currentPlayer
+      && board[m.getX()-1][m.getY()-1] == currentPlayer) {
+      std::cout << " no ennemy piece adjacent to this move " << std::endl;
          return false;
       }
 
@@ -104,7 +157,7 @@ bool PositionOthello::playerPlay(Move& m) {
       && tabDiaRightDown.empty() 
       && tabDiaLeftDown.empty() 
       && tabDiaLeftUp.empty()) {
-      cout << "no pieces to return so cannot play move" << endl;
+      std::cout << "no pieces to return so cannot play move" << std::endl;
       return false;
    }
    
@@ -175,72 +228,72 @@ bool PositionOthello::playerPlay(Move& m) {
 
 bool PositionOthello::checkRight(Move const& m) {
    if(board[m.getX()][m.getY()+1] == currentPlayer) {
-   	cout << "1" << endl;
+   	// std::cout << "1" << std::endl;
       return true;
    }
    if(m.getY()+1 >= 7 || board[m.getX()][m.getY()+1] == 0) {
       tabRight.clear();
-      cout << "CLEAR 1" << endl;
+      // std::cout << "CLEAR 1" << std::endl;
       return false;
    }
    else {
    	Move nextMove = Move(m.getX(), m.getY()+1);
       tabRight.push_back(nextMove);
-      cout << "R1" << endl;
+      // std::cout << "R1" << std::endl;
       return checkRight(nextMove);
    }
 }
 
 bool PositionOthello::checkLeft(Move const& m) {
    if(board[m.getX()][m.getY()-1] == currentPlayer) {
-   	cout << "2" << endl;
+   	// std::cout << "2" << std::endl;
       return true;
    }
    if(m.getY()-1 <= 0 || board[m.getX()][m.getY()-1] == 0) {
       tabLeft.clear();
-      cout << "CLEAR 2" << endl;
+      // std::cout << "CLEAR 2" << std::endl;
       return false;
    }
    else {
       Move nextMove = Move(m.getX(), m.getY()-1);
       tabLeft.push_back(nextMove);
-      cout << "R2" << endl;
+      // std::cout << "R2" << std::endl;
       return checkLeft(nextMove);
    }
 }
 
 bool PositionOthello::checkUp(Move const& m) {
    if(board[m.getX()-1][m.getY()] == currentPlayer) {
-   	cout << "3" << endl;
+   	// std::cout << "3" << std::endl;
       return true;
    }
    if(m.getX()-1 <= 0 || board[m.getX()-1][m.getY()] == 0) {
       tabUp.clear();
-      cout << "CLEAR 3" << endl;
+      // std::cout << "CLEAR 3" << std::endl;
       return false;
    }
    else {
    	Move nextMove = Move(m.getX()-1, m.getY());
       tabUp.push_back(nextMove);
-      cout << "R3" << endl;
+      // std::cout << "R3" << std::endl;
       return checkUp(nextMove);
    }
 }
 
 bool PositionOthello::checkDown(Move const& m) {
    if(board[m.getX()+1][m.getY()] == currentPlayer) {
-   	cout << "4" << endl;
+   	// std::cout << "4" << std::endl;
       return true;
    }
    if(m.getX()+1 >= 7 || board[m.getX()+1][m.getY()] == 0) {
       tabDown.clear();
-      cout << "CLEAR 4" << endl;
+      // std::cout << "CLEAR 4" << std::endl;
       return false;
    }
    else {
    	Move nextMove = Move(m.getX()+1, m.getY());
       tabDown.push_back(nextMove);
-      cout << "R4" << endl;
+      // std::cout << "R4" << std::endl;
       return checkDown(nextMove);
    }
 }
@@ -250,107 +303,120 @@ bool PositionOthello::checkDiagonalRightUp(Move const& m) {
    // cout << "sizeof(board) = " << sizeof(board) << endl;
    // cout << "(sizeof(board)/sizeof(int)) = " << (sizeof(board)/sizeof(int)) << endl;
    if(board[m.getX()-1][m.getY()+1] == currentPlayer) {
-   	cout << "5" << endl;
+   	// std::cout << "5" << std::endl;
       return true;
    }
    if(m.getY()+1 >= 7 || m.getX()-1 <= 0 || board[m.getX()-1][m.getY()+1] == 0) {
       tabDiaRightUp.clear();
-      cout << "CLEAR 5" << endl;
+      // std::cout << "CLEAR 5" << std::endl;
       return false;
    }
    else {
    	Move nextMove = Move(m.getX()-1, m.getY()+1);
       tabDiaRightUp.push_back(nextMove);
-      cout << "R5" << endl;
+      // std::cout << "R5" << std::endl;
       return checkDiagonalRightUp(nextMove);
    }
 }
 
 bool PositionOthello::checkDiagonalLeftUp(Move const& m) {
    if(board[m.getX()-1][m.getY()-1] == currentPlayer) {
-   	cout << "6" << endl;
+   	// std::cout << "6" << std::endl;
       return true;
    }
    if(m.getY()-1 <= 0 || m.getX()-1 <= 0 || board[m.getX()-1][m.getY()-1] == 0) {
       tabDiaLeftUp.clear();
-      cout << "CLEAR 6" << endl;
+      // std::cout << "CLEAR 6" << std::endl;
       return false;
    }
    else {
    	Move nextMove = Move(m.getX()-1, m.getY()-1);
       tabDiaLeftUp.push_back(nextMove);
-      cout << "R6" << endl;
+      // std::cout << "R6" << std::endl;
       return checkDiagonalLeftUp(nextMove);
    }
 }
 
 bool PositionOthello::checkDiagonalRightDown(Move const& m) {
    if(board[m.getX()+1][m.getY()+1] == currentPlayer) {
-   	cout << "7" << endl;
+   	// std::cout << "7" << std::endl;
       return true;
    }
    if(m.getX()+1 >= 7 || m.getY()+1 >= 7 || board[m.getX()+1][m.getY()+1] == 0) {
       tabDiaRightDown.clear();
-      cout << "CLEAR 7" << endl;
+      // std::cout << "CLEAR 7" << std::endl;
       return false;
    }
    else {
    	Move nextMove = Move(m.getX()+1, m.getY()+1);
       tabDiaRightDown.push_back(nextMove);
-      cout << "R7" << endl;
+      // std::cout << "R7" << std::endl;
       return checkDiagonalRightDown(nextMove);
    }
 }
 
 bool PositionOthello::checkDiagonalLeftDown(Move const& m) {
    if(board[m.getX()+1][m.getY()-1] == currentPlayer) {
-   	cout << "8" << endl;
+   	// std::cout << "8" << std::endl;
       return true;
    }
    if(m.getX()+1 >= 7 || m.getY()-1 == 0 || board[m.getX()+1][m.getY()-1] == 0) {
       tabDiaLeftDown.clear();
-      cout << "CLEAR 8" << endl;
+      // std::cout << "CLEAR 8" << std::endl;
       return false;
    }
    else {
    	Move nextMove = Move(m.getX()+1, m.getY()-1);
       tabDiaLeftDown.push_back(nextMove);
-      cout << "R8" << endl;
+      // std::cout << "R8" << std::endl;
       return checkDiagonalLeftDown(nextMove);
    }
 }
 
-int * PositionOthello::computeScore(int * res) {
+int * PositionOthello::computeScore(int r[]) {
 	int cpt0 = 0, cpt1 = 0, cpt2 = 0;
 	if(gameOver()) {
 		for(int i=0; i<8; i++) {
 	      for(int j=0; j<8; j++) {
-	         if(board[i][j] == 1) cpt1++; 
-	         if(board[i][j] == 2) cpt2++;
-	         else cpt0++;
+	         if(board[i][j] == 1) {
+               std::cout << "cpt1++ i =" << i << std::endl;
+               cpt1++; 
+            }
+	         if(board[i][j] == 2) {
+               std::cout << "cpt2++ i =" << i << std::endl;
+               cpt2++;
+	         } else {
+               std::cout << "cpt0++ i =" << i << std::endl;
+               cpt0++;
+            }
 	      }
 	   }
 	   if(cpt0>0 && cpt1>cpt2) {
 	   	cpt1+=cpt0;
-	   	res[0] = cpt1;
+	   	r[0] = cpt1;
+         r[1] = cpt2;
 	   }
 	   if(cpt0>0 && cpt2>cpt1) {
 	   	cpt2+=cpt0; 
-	   	res[1] = cpt2;
+	   	r[1] = cpt2;
+         r[0] = cpt1;
 	   }
 	   else {
-	   	res[0] = cpt1;
-	   	res[1] = cpt2;
+	   	r[0] = cpt1;
+	   	r[1] = cpt2;
+         std::cout << "in else of computeScore res[0] = " << r[0] << " res[1] = " << r[1] << std::endl;
 	   }
 	}
-	return res;
+   std::cout << "computeScore method nb of 1 = " << cpt1 << " number of 2 = " << cpt2 << " nb of 0 = " << cpt0 << std::endl;
+	return r;
 }
 
 int PositionOthello::winner() {
-	int res[2];
-	int *resptr = computeScore(res);
-	if(resptr[0]>resptr[1]) return 1;
-	if(resptr[1]>resptr[0]) return 2;
+   int r[2];
+	int *res = computeScore(r);
+   std::cout << " winner method res[0] =  " << res[0] << " winner method res[1] =  " << res[1] << std::endl;
+	if(res[0]>res[1]) return 1;
+	if(res[1]>res[0]) return 2;
 	else return 0; //draw
 }
 

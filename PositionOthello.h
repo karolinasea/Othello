@@ -9,7 +9,7 @@ class PositionOthello {
 
 public:
 	PositionOthello();
-	//~PositionOthello(); //not sure if i need a destructor or not yet
+	//~PositionOthello(); //not sure if i need a destructor or not yet maybe to delete Move vectors..
 
 	void printBoard();
 
@@ -23,8 +23,12 @@ public:
 	bool playerPlay(Move& m);
 
 	// when no move is possible for pawn we can skip turn
-	void passTurn();
+	void skipTurn();
 
+	//verifies if player is allowed to skip turn
+	//returns true if player is allowed to skip turn 
+	//and false if not allowed (which mean there is at least one possible move)
+	bool checkSkipTurn(Move& m);
 
 	//program must first check all the possible moves Move to make
 	//then eval the best one
@@ -53,7 +57,7 @@ public:
 	//might compute only one player score or both score
 	//compute only if game is over or anytime during game ??
 	//On compte les pions pour déterminer le score. Les cases vides sont données au vainqueur.
-	int * computeScore(int * res);
+	int * computeScore(int r[]);
 
 	//must somehow return or make or update a list (which kind ?) 
 	//of all possible moves considering the current position of all 
