@@ -379,14 +379,11 @@ int * PositionOthello::computeScore(int r[]) {
 		for(int i=0; i<8; i++) {
 	      for(int j=0; j<8; j++) {
 	         if(board[i][j] == 1) {
-               std::cout << "cpt1++ i =" << i << std::endl;
                cpt1++; 
             }
-	         if(board[i][j] == 2) {
-               std::cout << "cpt2++ i =" << i << std::endl;
+	         else if(board[i][j] == 2) {
                cpt2++;
 	         } else {
-               std::cout << "cpt0++ i =" << i << std::endl;
                cpt0++;
             }
 	      }
@@ -404,17 +401,17 @@ int * PositionOthello::computeScore(int r[]) {
 	   else {
 	   	r[0] = cpt1;
 	   	r[1] = cpt2;
-         std::cout << "in else of computeScore res[0] = " << r[0] << " res[1] = " << r[1] << std::endl;
+         // std::cout << "in else of computeScore res[0] = " << r[0] << " res[1] = " << r[1] << std::endl;
 	   }
 	}
-   std::cout << "computeScore method nb of 1 = " << cpt1 << " number of 2 = " << cpt2 << " nb of 0 = " << cpt0 << std::endl;
+   // std::cout << "computeScore method nb of 1 = " << cpt1 << " number of 2 = " << cpt2 << " nb of 0 = " << cpt0 << std::endl;
 	return r;
 }
 
 int PositionOthello::winner() {
    int r[2];
 	int *res = computeScore(r);
-   std::cout << " winner method res[0] =  " << res[0] << " winner method res[1] =  " << res[1] << std::endl;
+   // std::cout << " winner method res[0] =  " << res[0] << " winner method res[1] =  " << res[1] << std::endl;
 	if(res[0]>res[1]) return 1;
 	if(res[1]>res[0]) return 2;
 	else return 0; //draw

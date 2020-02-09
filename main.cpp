@@ -36,7 +36,7 @@ int main() {
       	}
 		while(!checkCoord(coord) && coord != "skip") {
 			cout << "Try again, you must enter the coordinates : letter and then number next to each other (no space)" << endl;
-			string coord;
+			// string coord;
 			cin >> coord;
 			if(cin.fail()) {
 		        cin.clear(); 
